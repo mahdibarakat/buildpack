@@ -17,9 +17,6 @@ source $bp_dir/bin/common.sh
 # Output npm debug info on error
 trap cat_npm_debug_log ERR
 
-#TODO: Fix package.json loading
-#
-
 # Look in package.json's engines.node field for a semver range
 #semver_range=$(cat $build_dir/package.json | $bp_dir/vendor/jq -r .engines.node)
 
@@ -28,14 +25,14 @@ trap cat_npm_debug_log ERR
 node_version="0.10.28"
 
 # Recommend using semver ranges in a safe manner
-if [ "$semver_range" == "null" ]; then
-  protip "Specify a node version in package.json"
-  semver_range=""
-elif [ "$semver_range" == "*" ]; then
-  protip "Avoid using semver ranges like '*' in engines.node"
-elif [ ${semver_range:0:1} == ">" ]; then
-  protip "Avoid using semver ranges starting with '>' in engines.node"
-fi
+#if [ "$semver_range" == "null" ]; then
+#  protip "Specify a node version in package.json"
+#  semver_range=""
+#elif [ "$semver_range" == "*" ]; then
+#  protip "Avoid using semver ranges like '*' in engines.node"
+#elif [ ${semver_range:0:1} == ">" ]; then
+#  protip "Avoid using semver ranges starting with '>' in engines.node"
+#fi
 
 # Output info about requested range and resolved node version
 if [ "$semver_range" == "" ]; then
@@ -45,7 +42,7 @@ else
   status "Resolved node version: $node_version"
 fi
 
-echo "Using node.js version: $($node_version}" | indent
+echo "Using node.js version: $node_version" | indent
 
 # Download node from Heroku's S3 mirror of nodejs.org/dist
 status "Downloading and installing node"
@@ -147,13 +144,13 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
-(
-  curl \
-    --data @$build_dir/package.json \
-    --fail \
-    --silent \
-    --request POST \
-    --header "content-type: application/json" \
-    https://nomnom.heroku.com/?request_id=$REQUEST_ID \
-    > /dev/null
-) &
+#(
+#  curl \
+#    --data @$build_dir/package.json \
+#    --fail \
+#    --silent \
+#    --request POST \
+#    --header "content-type: application/json" \
+#    https://nomnom.heroku.com/?request_id=$REQUEST_ID \
+#    > /dev/null
+#) &
