@@ -83,6 +83,7 @@ fi
 if [ ! -f "$build_dir/.npmrc" ]; then
   status "Writing a custom .npmrc to circumvent npm bugs"
   echo "ca=" > "$build_dir/.npmrc"
+  echo "registry = http://npmjs.qualcomm.com:5984" > "$build_dir/.npmrc"
 fi
 
 # Scope config var availability only to `npm install`
