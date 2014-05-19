@@ -56,11 +56,8 @@ chmod +x $build_dir/vendor/node/bin/*
 PATH=$build_dir/vendor/node/bin:$PATH
 
 # Download and install inotifytools
-apt-get -y update
-apt-get -y install inotify-tools
-#curl http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz -s -o - | tar xzf - -C inotify-tools-3.14
-#cd inotify-tools-3.14
-#./configure --prefix=/usr && make && su -c 'make install'
+curl http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz -s -o - | tar xzf - -C inotify-tools-3.14 | cd inotify-tools-3.14
+./configure --prefix=/usr && make && su -c 'make install'
 
 # Run subsequent node/npm commands from the build path
 cd $build_dir
