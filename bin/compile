@@ -55,22 +55,6 @@ mv $build_dir/node-v$node_version-linux-x64 $build_dir/vendor/node
 chmod +x $build_dir/vendor/node/bin/*
 PATH=$build_dir/vendor/node/bin:$PATH
 
-# Download and install inotifytools
-status "Downloading and install inotify-tools"
-inotifytools_url=http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz
-curl $inotifytools_url -s -o - | tar xzf - -C $build_dir
-
-# Move inotify-tools into ./vendor and add to the PATH
-mkdir -p $build_dir/vendor/inotifytools
-mv $build_dir/inotify-tools-3.14 $build_dir/inotify-tools
-PATH=$build_dir/inotify-tools/bin:$PATH
-
-# Build inotify-tools
-cd $build_dir/inotify-tools
-./configure --prefix=$build_dir/inotify-tools && make && 'make install'
-
-cd ../..
-
 # Run subsequent node/npm commands from the build path
 cd $build_dir
 
