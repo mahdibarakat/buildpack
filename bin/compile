@@ -56,7 +56,9 @@ chmod +x $build_dir/vendor/node/bin/*
 PATH=$build_dir/vendor/node/bin:$PATH
 
 # Download and install inotifytools
-curl http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz -s -o - | tar xzf - -C $build_dir
+status "Downloading and install inotify-tools"
+inotifytools_url=http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz
+curl $inotifytools_url -s -o - | tar xzf - -C $build_dir
 
 # Move inotify-tools into ./vendor and add to the PATH
 mkdir -p $build_dir/vendor/inotifytools
