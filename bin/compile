@@ -143,8 +143,9 @@ status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
-# Update the PATH environment variable with the URL for the correct version of node
-export PATH=$HOME/vendor/node/bin:$PATH
+# Copy the updated version of node to /usr/bin/node
+echo "Copying updated version of node to /usr/bin/node"
+cp -f $HOME/vendor/node/bin /usr/bin/node
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
