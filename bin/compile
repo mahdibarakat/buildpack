@@ -143,6 +143,7 @@ status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "echo \"*** Running nodejs.sh inside .profile.d ***\";" >> $build_dir/.profile.d/nodejs.sh
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" >> $build_dir/.profile.d/nodejs.sh
+echo "echo \"*** Finished running nodejs.sh inside .profile.d ***\";" >> $build_dir/.profile.d/nodejs.sh"
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
